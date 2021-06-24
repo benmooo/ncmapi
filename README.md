@@ -5,7 +5,7 @@ A go package for netease cloud Music API. --Why? Two factors make this repo sens
 ---
 
 ### Useage
-```
+```go
 api := necmapi.Default()
 res := api.Search("mota")
 
