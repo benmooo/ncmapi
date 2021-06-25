@@ -34,8 +34,8 @@ type ClientConfig struct {
 	PreserveCookies bool
 
 	// logs
-	LogRequest  bool
-	LogResponse bool
+	LogHttpRequest  bool
+	LogHttpResponse bool
 }
 
 func NewClient(cfg *ClientConfig) *Client {
@@ -70,8 +70,8 @@ func Default() *Client {
 func DefaultConfig() *ClientConfig {
 	return &ClientConfig{
 		PreserveCookies: true,
-		LogRequest:      false,
-		LogResponse:     false,
+		LogHttpRequest:  false,
+		LogHttpResponse: false,
 	}
 }
 
@@ -89,8 +89,8 @@ func (c *Client) req(r *apitypes.APIRequest) (*apitypes.APIResponse, error) {
 		return nil, err
 	}
 
-	if c.Config.LogRequest {
-		log.Printf("Request: %+v", req)
+	if c.Config.LogHttpRequest {
+		log.Printf("http request: %+v", req)
 	}
 
 	resp, err := c.Client.Do(req)
@@ -101,8 +101,8 @@ func (c *Client) req(r *apitypes.APIRequest) (*apitypes.APIResponse, error) {
 
 	data, _ := ioutil.ReadAll(resp.Body)
 
-	if c.Config.LogResponse {
-		log.Printf("Response: %+v", string(data))
+	if c.Config.LogHttpResponse {
+		log.Printf("http response: %+v", string(data))
 	}
 	// This is a compromise way to figure out that the reponse body are encryped or not
 	//

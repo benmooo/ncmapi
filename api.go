@@ -17,17 +17,29 @@ var BaseURL = url.URL{
 
 type NeteaseAPI struct {
 	Client APIClient
-	Config *NeteaseAPIConfig
 	Store  Store
+	Config *NeteaseAPIConfig
 }
 
-func New(client APIClient, store Store, config *NeteaseAPIConfig) *NeteaseAPI {
+func New(cfg *NeteaseAPIConfig) *NeteaseAPI {
 	api := &NeteaseAPI{
-		Client: client,
-		Config: config,
+		Client: client.NewClient(
+			&client.ClientConfig{
+				PreserveCookies: cfg.PreserveCookies,
+				LogHttpRequest:  cfg.LogHttpRequest,
+				LogHttpResponse: cfg.LogHttpResponse,
+			}),
+		Config: cfg,
 	}
-	if config.UseCache {
-		api.Store = store
+	if !cfg.DisableCache {
+		if cfg.CacheDefaultExpiration == 0 {
+			cfg.CacheDefaultExpiration = time.Minute * 3
+		}
+		if cfg.CacheCleanupInterval == 0 {
+			cfg.CacheCleanupInterval = time.Minute * 6
+		}
+		api.Store = inmemstore.New(
+			cfg.CacheDefaultExpiration, cfg.CacheCleanupInterval)
 	}
 
 	return api
@@ -35,13 +47,7 @@ func New(client APIClient, store Store, config *NeteaseAPIConfig) *NeteaseAPI {
 
 func Default() *NeteaseAPI {
 	cfg := DefaultNeteaseAPIConfig()
-
-	return &NeteaseAPI{
-		Client: client.Default(),
-
-		Store:  inmemstore.New(cfg.CacheDefaultExpiration, cfg.CacheCleanupInterval),
-		Config: cfg,
-	}
+	return New(cfg)
 }
 
 // This interface defines functions that a client model possess
@@ -89,7 +95,7 @@ func (api *NeteaseAPI) resolveRequest(areq *apitypes.APIRequest) (*apitypes.APIR
 	id := api.Client.RequestID(areq)
 
 	// has cache?
-	if api.Config.UseCache {
+	if !api.Config.DisableCache {
 		if data, ok := api.readFromCache(id); ok {
 			return data, nil
 		}
@@ -101,7 +107,7 @@ func (api *NeteaseAPI) resolveRequest(areq *apitypes.APIRequest) (*apitypes.APIR
 	}
 
 	// cache response
-	if api.Config.UseCache {
+	if !api.Config.DisableCache {
 		api.cacheAPIResponseDefault(id, resp)
 	}
 	return resp, nil
@@ -129,17 +135,20 @@ func (api *NeteaseAPI) cacheAPIResponseDefault(id string, resp *apitypes.APIResp
 }
 
 type NeteaseAPIConfig struct {
-	UseCache               bool
+	DisableCache           bool
 	CacheDefaultExpiration time.Duration
 	CacheCleanupInterval   time.Duration
+
+	PreserveCookies bool
+	LogHttpRequest  bool
+	LogHttpResponse bool
 }
 
 func DefaultNeteaseAPIConfig() *NeteaseAPIConfig {
 	return &NeteaseAPIConfig{
-		UseCache: true,
-
 		CacheDefaultExpiration: time.Minute * 3,
 		CacheCleanupInterval:   time.Minute * 6,
+		PreserveCookies:        true,
 	}
 
 }

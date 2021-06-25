@@ -38,15 +38,6 @@ func defaultSearchPayload() hm {
 	}
 }
 
-func concatPayload(host hm, payloads ...hm) hm {
-	for _, payload := range payloads {
-		for k, v := range payload {
-			host[k] = v
-		}
-	}
-	return host
-}
-
 func (api *NeteaseAPI) SearchSong(keyword string, opts ...hm) (*apitypes.SearchSongResult, error) {
 	opt := hm{}.Merge(opts...).Set("type", apitypes.SearchTypeSong).Set("s", keyword)
 	resp, err := api.search(keyword, "cloudsearch", opt)

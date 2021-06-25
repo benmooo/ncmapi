@@ -8,10 +8,7 @@ testCrypto:
 
 
 
-# Module
-testLogin:
-	go test -v -run TestLogin
-
+# Module Test
 testAlbum:
 	go test -v -run TestAlbum
 
@@ -30,11 +27,17 @@ testComment:
 testDailySign:
 	go test -v -run TestDailySign
 
-testSearch:
-	go test -v -run TestSearch
+testFmTrash:
+	go test -v -run TestFmTrash
 
 testLike:
 	go test -v -run TestLike
+
+testLogin:
+	go test -v -run TestLogin
+
+testLogout:
+	go test -v -run TestLogout
 
 testLyric:
 	go test -v -run TestLyric
@@ -62,12 +65,6 @@ testSimi:
 
 testSong:
 	go test -v -run TestSong
-
-testSong:
-	go test -v -run TestSong
-
-testUser:
-	go test -v -run TestUser
 
 testUser:
 	go test -v -run TestUser

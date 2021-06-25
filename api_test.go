@@ -7,8 +7,6 @@ import (
 
 	necmapi "github.com/benmooo/necm-api"
 	apitypes "github.com/benmooo/necm-api/api-types"
-	"github.com/benmooo/necm-api/client"
-	"github.com/benmooo/necm-api/inmemstore"
 )
 
 // test request & cache mechnism
@@ -71,20 +69,12 @@ func contains(s []string, e string) bool {
 //
 //
 //
-//
-//
-//
 // Setup
 
-var defaultConfig = necmapi.DefaultNeteaseAPIConfig()
 var api = necmapi.New(
-	client.NewClient(
-		&client.ClientConfig{
-			PreserveCookies: true,
-			// LogRequest:      true,
-			LogResponse: true,
-		},
-	),
-	inmemstore.Default(),
-	defaultConfig,
+	&necmapi.NeteaseAPIConfig{
+		CacheDefaultExpiration: time.Minute * 1,
+		PreserveCookies:        true,
+		// LogHttpResponse:        true,
+	},
 )

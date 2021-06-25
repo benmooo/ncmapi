@@ -69,5 +69,5 @@ func TestSearchArtist(t *testing.T) {
 	if res.Code != 200 {
 		t.Errorf("code: %d", res.Code)
 	}
-	t.Log(res)
+	// t.Log(res)
 }
