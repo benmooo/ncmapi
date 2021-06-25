@@ -148,8 +148,8 @@ func (c *Client) toHttpRequest(r *apitypes.APIRequest) (*http.Request, error) {
 
 func (c *Client) header(r *apitypes.APIRequest) http.Header {
 	header := http.Header{}
-	// general
 	header.Add("User-Agent", FakeUA(r.Option.UA))
+	// header.Add("X-Real-IP", "118.88.88.88")
 	if r.Method == http.MethodPost {
 		header.Add("Content-Type", "application/x-www-form-urlencoded")
 	}
@@ -157,7 +157,7 @@ func (c *Client) header(r *apitypes.APIRequest) http.Header {
 		header.Add("Referer", BaseURL.String())
 	}
 	if len(r.Option.RealIP) > 0 {
-		header.Add("X-Real-IP", r.Option.RealIP)
+		header.Set("X-Real-IP", r.Option.RealIP)
 	}
 	for _, cookie := range r.Option.Cookies {
 		header.Add("Cookie", cookie.String())

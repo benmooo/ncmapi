@@ -76,5 +76,6 @@ var api = necmapi.New(
 		CacheDefaultExpiration: time.Minute * 1,
 		PreserveCookies:        true,
 		// LogHttpResponse:        true,
+		LogHttpRequest: true,
 	},
 )

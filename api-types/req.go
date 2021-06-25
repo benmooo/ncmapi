@@ -103,6 +103,11 @@ func (ro *RequestOption) SetCrypto(c necmcrypto.Crypto) *RequestOption {
 	return ro
 }
 
+func (ro *RequestOption) SetRealIP(ip string) *RequestOption {
+	ro.RealIP = ip
+	return ro
+}
+
 type UserAgentType uint8
 
 const (

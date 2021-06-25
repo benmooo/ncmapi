@@ -1,21 +1,25 @@
+[EN](README.en.md) 👈
+
 <h1 align="center">NecmAPI</h1>
 
+![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/benmooo/necm-api)
 [![GoDoc](https://pkg.go.dev/badge/github.com/benmooo/necm-api?status.svg)](https://pkg.go.dev/github.com/benmooo/necm-api?tab=readme)
 [![Go Report Card](https://goreportcard.com/badge/github.com/benmooo/necm-api)](https://goreportcard.com/report/github.com/benmooo/necm-api)
+![GitHub](https://img.shields.io/github/license/benmooo/necm-api)
 
-A go package for netease cloud Music API. --Why? Two factors make this repo sense. First, better integration with go projects. If your go prject requires this kindof functions, just bring in this package. Second, 'local app' friendly. 'local' basicly means that an app independent of third api server. Sorry if i express the idea not exactly. Imagine that you have an app consumes necmapi, but you do not have a server to spin [NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi) up. A compromise way to handle this is every time your app starts up, spawn a new process to set up the api server locally, which is not a good idea. --When to use? Developing a go projects and won't bother to set up an api server.
+
+Go版本网易云音乐API. 为什么会有这个项目? 两点, 一来是没有合适的服务器来运行[NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi); 二来就是可以更好的整合进其他go项目.
 
 ---
 
-### Useage
+### 用法
 
-Installation
+安装
 ```sh
 $ go get -u github.com/benmooo/necm-api
 ```
 
-QuickStart
-
+使用
 ```go
 package main
 
@@ -32,20 +36,35 @@ func main() {
 }
 ```
 
+配置
+```go
+func main() {
+	api := necmapi.New(
+		&necmapi.NeteaseAPIConfig{
+			CacheDefaultExpiration: time.Minute * 1,
+			CacheCleanupInterval:   time.Minute * 2,
+            PreserveCookies: true,
+		},
+	)
 
-### Document
+	// ...
+}
+```
 
-Most of the functions are self documented. If there is some confusion about the params of a funtion requires, figure out [here](https://neteasecloudmusicapi.vercel.app)
+
+### 文档
+
+大多数函数都有很好注释, 如果发现有地方不太清楚, 可以参考 [这里](https://neteasecloudmusicapi.vercel.app)
 
 
 
-### How it works
+### 原理
 
-Necmapi consists of three parts
-* api: which is iteself, resolves an APIRequest to retrive data from cache or forwarding an http request.
-* client: takes an APIRequst, process it into a http.Request by presenting it with header and encrypt the payload etc. And then send requests to the server and returns the response back.
-* store: for caching
+Necmapi 主要由三部分组成
+* api: 接受APIRequest, 根据这个请求的id决定发送http请求或者从缓存中取数据.
+* client: 模拟客户端, 负责点缀APIRequest, 加密payload, 然后发送http请求, 解密response等等.
+* store: 用于缓存
 
-### Contribute
+### 贡献
 
-If you think this package useful, please do make pull requests.
+欢迎PR.

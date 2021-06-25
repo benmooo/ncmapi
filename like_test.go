@@ -4,8 +4,8 @@ import (
 	"testing"
 )
 
-func TestLike(t *testing.T) {
-	resp, err := api.Like(songId)
+func TestLikeSong(t *testing.T) {
+	resp, err := api.Like(1254362)
 	if err != nil {
 		t.Error(err)
 	}
