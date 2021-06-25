@@ -43,7 +43,7 @@ func main() {
 		&necmapi.NeteaseAPIConfig{
 			CacheDefaultExpiration: time.Minute * 1,
 			CacheCleanupInterval:   time.Minute * 2,
-            PreserveCookies: true,
+			PreserveCookies:        true,
 		},
 	)
 
