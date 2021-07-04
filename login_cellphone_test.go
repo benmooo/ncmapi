@@ -1,6 +1,8 @@
 package necmapi_test
 
 import (
+	"io/ioutil"
+	"strings"
 	"testing"
 )
 
@@ -8,8 +10,18 @@ func TestLoginPhone(t *testing.T) {
 	// persist cookie in local file
 	defer api.Client.PreserveCookies()
 
-	phone, password := "13588244781", "vaneyue0802"
-	resp, err := api.LoginPhone(phone, password)
+	f, err := ioutil.ReadFile(".auth")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	auth := strings.Split(string(f), "\n")
+
+	if len(auth) != 2 {
+		t.Fatal("not correct auth credential!")
+	}
+
+	resp, err := api.LoginPhone(auth[0], auth[1])
 	if err != nil {
 		t.Error(err)
 	}

@@ -14,6 +14,7 @@ import (
 	"encoding/pem"
 	"errors"
 	"fmt"
+	"log"
 	"math/big"
 	"strings"
 )
@@ -104,7 +105,7 @@ func RsaEncrypt(text []byte, pk []byte) []byte {
 
 func WeapiEncrypt(text []byte) map[string]string {
 	buf := make([]byte, secretKeyLen)
-	_, _ = rand.Read(buf)
+	rand.Read(buf)
 
 	sk := make([]byte, secretKeyLen)
 	reverseSK := make([]byte, secretKeyLen)
@@ -121,6 +122,9 @@ func WeapiEncrypt(text []byte) map[string]string {
 
 	encSecKey := hex.EncodeToString(RsaEncrypt(reverseSK, []byte(publicKey)))
 
+	log.Printf("params=%v", params)
+	log.Printf("encSecKey=%v", encSecKey)
+
 	return map[string]string{
 		"params":    params,
 		"encSecKey": encSecKey,
@@ -135,10 +139,10 @@ func Md5Hex(message string) string {
 
 func EapiEncrypt(url []byte, data interface{}) map[string]string {
 	text, _ := json.Marshal(data)
-	message := fmt.Sprintf("nobody%suse%smd5forencrypt", url, text)
-	md := md5.New()
-	md.Write([]byte(message))
-	digest := hex.EncodeToString(md.Sum(nil))
+	message := fmt.Sprintf("nobody%suse%smd5forencrypt", string(url), text)
+	_hash := md5.Sum([]byte(message))
+	digest := hex.EncodeToString(_hash[:])
+
 	_data := fmt.Sprintf("%s-36cd479b6b5-%s-36cd479b6b5-%s", url, text, digest)
 	return map[string]string{
 		"params": strings.ToUpper(hex.EncodeToString(

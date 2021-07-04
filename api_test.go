@@ -75,7 +75,7 @@ var api = necmapi.New(
 	&necmapi.NeteaseAPIConfig{
 		CacheDefaultExpiration: time.Minute * 1,
 		PreserveCookies:        true,
-		// LogHttpResponse:        true,
-		LogHttpRequest: true,
+		LogHttpResponse:        true,
+		LogHttpRequest:         true,
 	},
 )
