@@ -127,7 +127,8 @@ func (c *Client) req(r *apitypes.APIRequest) (*apitypes.APIResponse, error) {
 	// sync cookies
 	cs := resp.Cookies()
 	if c.Config.PreserveCookies && len(cs) > 0 {
-		c.WriteCookies(cs)
+    cookies := c.Jar.Cookies(&BaseURL)
+		c.WriteCookies(cookies)
 	}
 
 	return &apitypes.APIResponse{Data: data}, nil
