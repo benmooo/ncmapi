@@ -14,7 +14,6 @@ import (
 	"encoding/pem"
 	"errors"
 	"fmt"
-	"log"
 	"math/big"
 	"strings"
 )
@@ -121,9 +120,6 @@ func WeapiEncrypt(text []byte) map[string]string {
 		AesEncryptCBC([]byte(_params), sk, []byte(iv), aes.BlockSize))
 
 	encSecKey := hex.EncodeToString(RsaEncrypt(reverseSK, []byte(publicKey)))
-
-	log.Printf("params=%v", params)
-	log.Printf("encSecKey=%v", encSecKey)
 
 	return map[string]string{
 		"params":    params,
