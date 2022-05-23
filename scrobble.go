@@ -1,10 +1,10 @@
-package necmapi
+package ncmapi
 
 import (
 	"encoding/json"
 	"net/http"
 
-	apitypes "github.com/benmooo/necm-api/api-types"
+	apitypes "github.com/benmooo/ncmapi/api-types"
 )
 
 // 说明 : 调用此接口 , 传入音乐 id, 来源 id，歌曲时间 time，更新听歌排行数据

@@ -1,4 +1,4 @@
-package necmapi_test
+package ncmapi_test
 
 import "testing"
 

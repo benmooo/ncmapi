@@ -1,13 +1,13 @@
-package necmapi
+package ncmapi
 
 import (
 	"net/http"
 	"net/url"
 	"time"
 
-	apitypes "github.com/benmooo/necm-api/api-types"
-	"github.com/benmooo/necm-api/client"
-	"github.com/benmooo/necm-api/inmemstore"
+	apitypes "github.com/benmooo/ncmapi/api-types"
+	"github.com/benmooo/ncmapi/client"
+	"github.com/benmooo/ncmapi/inmemstore"
 )
 
 var BaseURL = url.URL{
@@ -23,12 +23,8 @@ type NeteaseAPI struct {
 
 func New(cfg *NeteaseAPIConfig) *NeteaseAPI {
 	api := &NeteaseAPI{
-		Client: client.NewClient(
-			&client.ClientConfig{
-				PreserveCookies: cfg.PreserveCookies,
-				LogHttpRequest:  cfg.LogHttpRequest,
-				LogHttpResponse: cfg.LogHttpResponse,
-			}),
+		Client: client.NewClient(&client.ClientConfig{PreserveCookies: cfg.PreserveCookies, LogHttpRequest: cfg.LogHttpRequest, LogHttpResponse: cfg.LogHttpResponse}),
+		Store:  nil,
 		Config: cfg,
 	}
 	if !cfg.DisableCache {
@@ -58,8 +54,6 @@ type APIClient interface {
 	ReqID(method string, url string, data apitypes.H, opt *apitypes.RequestOption) string
 
 	// cookies synchronization
-	ReadSetCookies()
-	PreserveCookies() error
 	Cookies(u *url.URL) []*http.Cookie
 	HasCookie(u *url.URL, name string) bool
 }

@@ -15,8 +15,8 @@ import (
 	"strings"
 	"time"
 
-	apitypes "github.com/benmooo/necm-api/api-types"
-	necmcrypto "github.com/benmooo/necm-api/crypto"
+	apitypes "github.com/benmooo/ncmapi/api-types"
+	necmcrypto "github.com/benmooo/ncmapi/crypto"
 )
 
 var BaseURL = url.URL{
@@ -51,7 +51,7 @@ func NewClient(cfg *ClientConfig) *Client {
 
 func (c *Client) init() {
 	if c.Config.PreserveCookies {
-		c.ReadSetCookies()
+		c.SyncCookiesFromLocal()
 	}
 }
 
@@ -102,6 +102,7 @@ func (c *Client) req(r *apitypes.APIRequest) (*apitypes.APIResponse, error) {
 	data, _ := ioutil.ReadAll(resp.Body)
 
 	if c.Config.LogHttpResponse {
+		log.Printf("http response cookies: %+v", resp.Cookies())
 		log.Printf("http response: %+v", string(data))
 	}
 	// This is a compromise way to figure out that the reponse body are encryped or not
@@ -121,6 +122,12 @@ func (c *Client) req(r *apitypes.APIRequest) (*apitypes.APIResponse, error) {
 			}
 			return &apitypes.APIResponse{Data: pt}, nil
 		}
+	}
+
+	// sync cookies
+	cs := resp.Cookies()
+	if c.Config.PreserveCookies && len(cs) > 0 {
+		c.WriteCookies(cs)
 	}
 
 	return &apitypes.APIResponse{Data: data}, nil

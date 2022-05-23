@@ -5,7 +5,7 @@ import (
 	"encoding/hex"
 	"testing"
 
-	necmcrypto "github.com/benmooo/necm-api/crypto"
+	necmcrypto "github.com/benmooo/ncmapi/crypto"
 )
 
 func TestAesEncryptCBC(t *testing.T) {

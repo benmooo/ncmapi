@@ -1,10 +1,10 @@
-package necmapi
+package ncmapi
 
 import (
 	"fmt"
 	"net/http"
 
-	apitypes "github.com/benmooo/necm-api/api-types"
+	apitypes "github.com/benmooo/ncmapi/api-types"
 )
 
 // 说明 : 调用此接口,可发送评论或者删除评论

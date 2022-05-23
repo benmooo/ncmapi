@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	necmcrypto "github.com/benmooo/necm-api/crypto"
+	necmcrypto "github.com/benmooo/ncmapi/crypto"
 )
 
 type APIRequest struct {

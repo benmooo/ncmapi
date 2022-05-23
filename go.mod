@@ -1,4 +1,4 @@
-module github.com/benmooo/necm-api
+module github.com/benmooo/ncmapi
 
 go 1.16
 

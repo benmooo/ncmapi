@@ -1,9 +1,9 @@
-package necmapi
+package ncmapi
 
 import (
 	"net/http"
 
-	apitypes "github.com/benmooo/necm-api/api-types"
+	apitypes "github.com/benmooo/ncmapi/api-types"
 )
 
 // 说明 : 登录后调用此接口 , 传入用户 id, 可获取用户播放记录

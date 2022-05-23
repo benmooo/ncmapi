@@ -1,9 +1,9 @@
-package necmapi
+package ncmapi
 
 import (
 	"net/http"
 
-	apitypes "github.com/benmooo/necm-api/api-types"
+	apitypes "github.com/benmooo/ncmapi/api-types"
 )
 
 // 说明 : 调用此接口,可获取歌手全部歌曲 必选参数 :

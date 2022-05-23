@@ -1,11 +1,11 @@
-package necmapi
+package ncmapi
 
 import (
 	"fmt"
 	"net/http"
 
-	apitypes "github.com/benmooo/necm-api/api-types"
-	necmcrypto "github.com/benmooo/necm-api/crypto"
+	apitypes "github.com/benmooo/ncmapi/api-types"
+	necmcrypto "github.com/benmooo/ncmapi/crypto"
 )
 
 // 新版评论接口

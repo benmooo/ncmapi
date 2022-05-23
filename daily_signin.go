@@ -1,9 +1,9 @@
-package necmapi
+package ncmapi
 
 import (
 	"net/http"
 
-	apitypes "github.com/benmooo/necm-api/api-types"
+	apitypes "github.com/benmooo/ncmapi/api-types"
 )
 
 // 说明 : 调用此接口 , 传入签到类型 ( 可不传 , 默认安卓端签到 ), 可签到 ( 需要登录 ), 其中安卓端签到可获得 3 点经验 , web/PC 端签到可获得 2 点经验

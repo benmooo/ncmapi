@@ -42,8 +42,8 @@ testLogout:
 testLyric:
 	go test -v -run TestLyric
 
-testPersonalFM:
-	go test -v -run TestPersonalFM
+testPersonalFm:
+	go test -v -run TestPersonalFm
 
 testPlaylist:
 	go test -v -run TestPlaylist

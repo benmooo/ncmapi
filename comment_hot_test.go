@@ -1,9 +1,9 @@
-package necmapi_test
+package ncmapi_test
 
 import (
 	"testing"
 
-	apitypes "github.com/benmooo/necm-api/api-types"
+	apitypes "github.com/benmooo/ncmapi/api-types"
 )
 
 func TestCommentHot(t *testing.T) {

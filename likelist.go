@@ -1,9 +1,9 @@
-package necmapi
+package ncmapi
 
 import (
 	"net/http"
 
-	apitypes "github.com/benmooo/necm-api/api-types"
+	apitypes "github.com/benmooo/ncmapi/api-types"
 )
 
 // 说明 : 调用此接口 , 传入用户 id, 可获取已喜欢音乐id列表(id数组)

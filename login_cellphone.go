@@ -1,10 +1,10 @@
-package necmapi
+package ncmapi
 
 import (
 	"net/http"
 
-	apitypes "github.com/benmooo/necm-api/api-types"
-	necmcrypto "github.com/benmooo/necm-api/crypto"
+	apitypes "github.com/benmooo/ncmapi/api-types"
+	ncmcrypto "github.com/benmooo/ncmapi/crypto"
 )
 
 // 必选参数 :
@@ -15,7 +15,7 @@ import (
 // countrycode: 国家码，用于国外手机号登录，例如美国传入：1
 // md5_password: md5加密后的密码,传入后 password 将失效
 func (api *NeteaseAPI) LoginPhone(phone string, password string) (*APIResponse, error) {
-	passwd := necmcrypto.Md5Hex(password)
+	passwd := ncmcrypto.Md5Hex(password)
 	payload := defaultLoginPayload().Set("phone", phone).Set("password", passwd)
 
 	opt := apitypes.DefaultRequestOption().AddCookie("os", "pc")

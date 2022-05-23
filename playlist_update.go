@@ -1,11 +1,11 @@
-package necmapi
+package ncmapi
 
 import (
 	"fmt"
 	"net/http"
 	"strings"
 
-	apitypes "github.com/benmooo/necm-api/api-types"
+	apitypes "github.com/benmooo/ncmapi/api-types"
 )
 
 // 说明 : 登录后调用此接口,可以更新用户歌单

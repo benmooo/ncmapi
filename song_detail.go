@@ -1,4 +1,4 @@
-package necmapi
+package ncmapi
 
 import (
 	"encoding/json"

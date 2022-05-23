@@ -1,19 +1,19 @@
-package necmapi_test
+package ncmapi_test
 
 import (
 	"net/http"
 	"testing"
 	"time"
 
-	necmapi "github.com/benmooo/necm-api"
-	apitypes "github.com/benmooo/necm-api/api-types"
+	ncmapi "github.com/benmooo/ncmapi"
+	apitypes "github.com/benmooo/ncmapi/api-types"
 )
 
 // test request & cache mechnism
 func TestApi(t *testing.T) {
 	payload := hm{"type": apitypes.SearchTypeSong, "offset": 0, "limit": 1}.Set("s", "xusong")
 	opt := apitypes.DefaultRequestOption()
-	areq := apitypes.NewAPIRequest(http.MethodPost, necmapi.APIRoutes["cloudsearch"], payload, opt)
+	areq := apitypes.NewAPIRequest(http.MethodPost, ncmapi.APIRoutes["cloudsearch"], payload, opt)
 
 	// flush all cache
 	api.Store.Flush()
@@ -71,8 +71,8 @@ func contains(s []string, e string) bool {
 //
 // Setup
 
-var api = necmapi.New(
-	&necmapi.NeteaseAPIConfig{
+var api = ncmapi.New(
+	&ncmapi.NeteaseAPIConfig{
 		CacheDefaultExpiration: time.Minute * 1,
 		PreserveCookies:        true,
 		LogHttpResponse:        true,

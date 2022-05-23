@@ -1,6 +1,6 @@
 package client
 
-import apitypes "github.com/benmooo/necm-api/api-types"
+import apitypes "github.com/benmooo/ncmapi/api-types"
 
 func FakeUA(ua apitypes.UserAgentType) string {
 	switch ua {

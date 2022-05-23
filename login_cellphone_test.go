@@ -1,4 +1,4 @@
-package necmapi_test
+package ncmapi_test
 
 import (
 	"io/ioutil"
@@ -7,9 +7,6 @@ import (
 )
 
 func TestLoginPhone(t *testing.T) {
-	// persist cookie in local file
-	defer api.Client.PreserveCookies()
-
 	f, err := ioutil.ReadFile(".auth")
 	if err != nil {
 		t.Fatal(err)
@@ -17,9 +14,11 @@ func TestLoginPhone(t *testing.T) {
 
 	auth := strings.Split(string(f), "\n")
 
-	if len(auth) != 2 {
+	if len(auth) < 2 {
 		t.Fatal("not correct auth credential!")
 	}
+	//
+  // print(auth[0], auth[1])
 
 	resp, err := api.LoginPhone(auth[0], auth[1])
 	if err != nil {

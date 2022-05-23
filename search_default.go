@@ -1,10 +1,10 @@
-package necmapi
+package ncmapi
 
 import (
 	"net/http"
 
-	apitypes "github.com/benmooo/necm-api/api-types"
-	necmcrypto "github.com/benmooo/necm-api/crypto"
+	apitypes "github.com/benmooo/ncmapi/api-types"
+	necmcrypto "github.com/benmooo/ncmapi/crypto"
 )
 
 // 说明 : 调用此接口 , 可获取默认搜索关键词

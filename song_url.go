@@ -1,4 +1,4 @@
-package necmapi
+package ncmapi
 
 import (
 	"crypto/rand"
@@ -6,8 +6,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	apitypes "github.com/benmooo/necm-api/api-types"
-	necmcrypto "github.com/benmooo/necm-api/crypto"
+	apitypes "github.com/benmooo/ncmapi/api-types"
+	necmcrypto "github.com/benmooo/ncmapi/crypto"
 )
 
 // 说明 : 使用歌单详情接口后 , 能得到的音乐的 id, 但不能得到的音乐 url, 调用此接口, 传入的音乐 id( 可多个 , 用逗号隔开 ),

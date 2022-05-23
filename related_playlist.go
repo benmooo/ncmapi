@@ -1,4 +1,4 @@
-package necmapi
+package ncmapi
 
 // 说明 : 调用此接口,传入歌单 id 可获取相关歌单
 //
