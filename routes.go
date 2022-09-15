@@ -96,7 +96,7 @@ var APIRoutes = map[string]string{
 	"like":                             "https://music.163.com/api/radio/like",
 	"likelist":                         "https://music.163.com/weapi/song/like/get",
 	"listen_together_status":           "https://music.163.com/api/listen/together/status/get",
-	"login_cellphone":                  "https://music.163.com/weapi/login/cellphone",
+	"login_cellphone":                  "https://music.163.com/api/login/cellphone",
 	"login":                            "https://music.163.com/weapi/login",
 	"login_qr_check":                   "https://music.163.com/weapi/login/qrcode/client/login",
 	"login_qr_create":                  "https://music.163.com/login?codekey=${query.key}",

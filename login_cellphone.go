@@ -18,7 +18,7 @@ func (api *NeteaseAPI) LoginPhone(phone string, password string) (*APIResponse, 
 	passwd := ncmcrypto.Md5Hex(password)
 	payload := defaultLoginPayload().Set("phone", phone).Set("password", passwd)
 
-	opt := apitypes.DefaultRequestOption().AddCookie("os", "pc")
+	opt := apitypes.DefaultRequestOption().AddCookie("os", "pc").AddCookie("appver", "2.9.7")
 	resp, err := api.Req(http.MethodPost, APIRoutes["login_cellphone"], payload, opt)
 
 	return resp, err
@@ -27,6 +27,6 @@ func (api *NeteaseAPI) LoginPhone(phone string, password string) (*APIResponse, 
 func defaultLoginPayload() hm {
 	return hm{
 		"countrycode":   "86",
-		"rememberLogin": true,
+		"rememberLogin": "true",
 	}
 }

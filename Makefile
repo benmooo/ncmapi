@@ -34,7 +34,7 @@ testLike:
 	go test -v -run TestLike
 
 testLogin:
-	go test -v -run TestLogin
+	go test -v -run TestLoginPhone
 
 testLogout:
 	go test -v -run TestLogout

@@ -18,7 +18,7 @@ func TestLoginPhone(t *testing.T) {
 		t.Fatal("not correct auth credential!")
 	}
 	//
-  // print(auth[0], auth[1])
+	// print(auth[0], auth[1])
 
 	resp, err := api.LoginPhone(auth[0], auth[1])
 	if err != nil {
